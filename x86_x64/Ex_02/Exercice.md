@@ -212,19 +212,19 @@ child stopped with signal 11
 As forcasted ```EIP``` has been set to ```0xaabbccdd``` and the ```SEGFAULT```
 happened.
 
-- In the example function ```addme```, what would happen if the stack pointer
-  were not properly restored before executing ```RET```?
+### In the example function ```addme```, what would happen if the stack pointer were not properly restored before executing ```RET```?
 
 The execution would not get back on track and this lead to an undefined state.
 At best it produces a ```SEGFAULT``` as shown before, worst case is the control
 flow hijacked in order to execute malicious instructions.
 
-- In all of the calling conventions explained, the return value is stored in a
-  32-bit register (```EAX```). What happens when the return value does not fit
-  in a 32-bit register? Write program to experiment and evaluate your answer.
-  Does the mechanism change from compiler to compiler?
+### In all of the calling conventions explained, the return value is stored in a 32-bit register (```EAX```). What happens when the return value does not fit in a 32-bit register? Write program to experiment and evaluate your answer. Does the mechanism change from compiler to compiler?
 
 When the return value does not fit it is truncated, this situations is called an
 ```overflow``` and raised a special flag ```OF``` in ```RFLAGS```. This is a
 dangerous situations and can be used to get around control flow instruction and
 hijack the execution flow.
+
+A good example is the note from the first question regarding the return code
+which should have been different. This example was based on a ```POSIX``` system
+but ```Windows``` is able to return 32 bits long return code.
